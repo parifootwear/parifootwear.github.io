@@ -49,9 +49,20 @@ function render(){
  const box=document.getElementById("products");
  box.innerHTML=list.map(p=>`<article class="card">
  <img src="${p.image||'https://via.placeholder.com/500x400?text=Pari+Footwear'}" alt="${p.name}">
- <div class="info"><b>${p.name}</b><p class="price">${p.price}</p>
- <div class="sizes">${p.sizes.map(x=>`<span>${x}</span>`).join("")}</div>
- <a class="wa" href="https://wa.me/919523275559?text=${encodeURIComponent("Pari Footwear me "+p.name+" ke size/price ke baare me poochna hai.")}">WhatsApp Enquiry</a></div></article>`).join("") || '<div class="empty">Product nahi mila.</div>';
+<div class="info"><b>${p.name}</b><p class="price">${p.price}</p>
+<div class="sizes">${p.sizes.map(x=>`<button type="button" onclick="selectSize('${x},this)">${x}</button>`).join("")}</div>
+<a class="wa" href="#" onclick="sendWhatsApp('${p.name}','${p.price}');return false;">WhatsApp Enquiry</a></div></article>`).join("")
+
+let selectedSize = "";
+
+function selectSize(size,button){
+  selectedSize = size;
+  document.querySelectorAll(".sizes button").forEach(b => b.style.background = "");
+  button.style.background = "#c89b3c";
+}function sendWhatsApp(name, price){
+  const size = selectedSize || "Size select nahi kiya";
+  const message = `Pari Footwear me ${name} ke size ${size} aur price ₹${price} ke baare me poochna hai.`;
+  window.open("https://wa.me/919523275559?text=" + encodeURIComponent(message), "_blank");
 }
 function fillSizes(){let a=[...new Set(products.flatMap(p=>p.sizes))].sort((a,b)=>Number(a)-Number(b));document.getElementById("size").innerHTML='<option value="">All Sizes</option>'+a.map(x=>`<option>${x}</option>`).join("")}
 fillSizes();render();
