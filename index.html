@@ -23,7 +23,7 @@ body{
 
 header{
   background:linear-gradient(135deg,#111,#3b2a0e);
-  color:#fff;
+  color:white;
   padding:22px 16px;
   text-align:center;
 }
@@ -31,127 +31,156 @@ header{
 .logo{
   width:90px;
   height:90px;
-  border-radius:18px;
-  object-fit:contain;
-  background:#fff;
-  padding:4px;
+  object-fit:cover;
+  border-radius:25px;
+  background:white;
 }
 
 h1{
-  margin:8px 0 4px;
+  margin:10px 0 2px;
   color:#e5bd64;
-  letter-spacing:1px;
+  font-family:Georgia,serif;
+  font-size:38px;
 }
 
-.sub{
+header p{
   margin:0;
-  color:#eee;
+  font-family:Georgia,serif;
+  font-size:22px;
+  font-weight:bold;
 }
 
-nav{
+.categories{
   display:flex;
-  gap:8px;
-  overflow:auto;
-  padding:12px;
-  background:#fff;
-  position:sticky;
-  top:0;
-  z-index:5;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:20px 10px;
+  background:white;
   border-bottom:1px solid #ddd;
 }
 
-nav button{
+.categories button,
+.sizes button{
   border:1px solid #c89b3c;
-  background:#fff8e8;
-  border-radius:20px;
-  padding:9px 15px;
-  white-space:nowrap;
+  background:#fffaf0;
+  border-radius:25px;
+  padding:12px 25px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.categories button.active,
+.sizes button.selected{
+  background:#c89b3c;
+  color:white;
 }
 
 .controls{
-  padding:16px;
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  gap:15px;
+  padding:26px;
+  background:var(--cream);
 }
 
-.controls input,
-.controls select{
-  padding:12px;
-  border:1px solid #ddd;
-  border-radius:10px;
+#search{
   flex:1;
-  min-width:180px;
+  padding:18px;
+  border:1px solid #ddd;
+  border-radius:16px;
+  font-size:18px;
+}
+
+#size{
+  width:46%;
+  padding:18px;
+  border:1px solid #ddd;
+  border-radius:16px;
+  font-size:18px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
-  gap:14px;
-  padding:0 16px 30px;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:20px;
+  padding:25px;
 }
 
 .card{
-  background:#fff;
-  border-radius:14px;
+  background:white;
+  border-radius:18px;
   overflow:hidden;
-  box-shadow:0 2px 10px #0001;
+  box-shadow:0 3px 12px #0002;
 }
 
 .card img{
   width:100%;
-  height:auto;
-  object-fit:contain;
-  background:#f3f3f3;
+  height:380px;
+  object-fit:cover;
+  display:block;
 }
 
 .info{
-  padding:12px;
+  padding:20px;
+}
+
+.info b{
+  font-size:25px;
+  font-family:Georgia,serif;
 }
 
 .price{
+  color:#b8860b;
+  font-size:25px;
   font-weight:bold;
-  color:#9b701e;
-  font-size:18px;
+  margin:12px 0;
+}
+
+.sizes{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin:15px 0;
 }
 
 .sizes button{
-  display:inline-block;
-  padding:6px 9px;
-  margin:3px;
-  border:1px solid #ddd;
-  border-radius:6px;
-  background:#fff;
-  cursor:pointer;
-}
-
-.sizes button.selected{
-  background:#c89b3c;
-  color:#fff;
+  padding:10px 18px;
+  border-radius:10px;
+  font-size:17px;
 }
 
 .wa{
   display:block;
   text-align:center;
-  margin-top:10px;
-  padding:9px;
-  background:#1f9d55;
-  color:white;
   text-decoration:none;
-  border-radius:8px;
+  background:#25D366;
+  color:white;
+  padding:14px;
+  border-radius:10px;
+  font-size:18px;
+  font-weight:bold;
 }
 
 footer{
-  text-align:center;
   background:#171717;
-  color:#fff;
-  padding:24px;
+  color:white;
+  text-align:center;
+  padding:30px 15px;
+  font-family:Georgia,serif;
+  font-size:20px;
 }
 
-.empty{
-  text-align:center;
-  padding:30px;
-  color:#777;
+footer a{
+  color:#e5bd64;
+}
+
+@media(max-width:600px){
+  h1{font-size:32px}
+  header p{font-size:18px}
+  .controls{padding:20px 15px}
+  .grid{padding:15px}
+  .card img{height:auto}
+  #size{width:45%}
 }
 </style>
 </head>
@@ -159,21 +188,21 @@ footer{
 <body>
 
 <header>
-  <img class="logo" src="assets/logo.jpg" alt="Pari Footwear Logo">
+  <img class="logo" src="assets/logo.jpg" alt="Pari Footwear">
   <h1>PARI FOOTWEAR</h1>
-  <p class="sub">KD Road, Khalari, Ranchi, Jharkhand</p>
+  <p>KD Road, Khalari, Ranchi, Jharkhand</p>
 </header>
 
-<nav id="cats">
-  <button onclick="setCat('All')">All</button>
+<div class="categories">
+  <button onclick="setCat('All')" class="active">All</button>
   <button onclick="setCat('Men')">Men</button>
   <button onclick="setCat('Women')">Women</button>
   <button onclick="setCat('Kids')">Kids</button>
   <button onclick="setCat('Sports')">Sports</button>
-</nav>
+</div>
 
 <div class="controls">
-  <input id="search" placeholder="Product search..." oninput="render()">
+  <input id="search" type="text" placeholder="Product search..." oninput="render()">
 
   <select id="size" onchange="render()">
     <option value="">All Sizes</option>
@@ -186,9 +215,7 @@ footer{
   <b>PARI FOOTWEAR</b><br>
   KD Road, Khalari, Ranchi, Jharkhand<br>
   WhatsApp:
-  <a style="color:#e5bd64" href="https://wa.me/919523275559">
-    9523275559
-  </a>
+  <a href="https://wa.me/919523275559">9523275559</a>
 </footer>
 
 <script>
@@ -197,138 +224,119 @@ const products = [
   {
     name:"Men's Sports Shoe",
     category:"Men",
-    price:"1499",
+    price:"₹1499",
     sizes:["6","7","8","9","10"],
-    image:"https://alncuvhcdovjxmydxviv.supabase.co/storage/v1/object/public/PRODUCT-IMAGES/WhatsApp%20Image%202026-08-18%20at%204.05.34%20PM.jpeg",
-    available:true
+    image:"https://via.placeholder.com/600x600?text=Pari+Footwear"
   }
 ];
 
-let cat = "All";
-let selectedSize = "";
+let cat="All";
+let selectedSize="";
 
 function setCat(c){
-  cat = c;
+  cat=c;
+
+  document.querySelectorAll(".categories button").forEach(btn=>{
+    btn.classList.remove("active");
+    if(btn.textContent===c){
+      btn.classList.add("active");
+    }
+  });
+
   render();
 }
 
-function selectSize(size, button){
+function selectSize(size,button){
+  selectedSize=size;
 
-  selectedSize = size;
-
-  document
-    .querySelectorAll(".sizes button")
-    .forEach(btn => btn.classList.remove("selected"));
+  document.querySelectorAll(".sizes button").forEach(btn=>{
+    btn.classList.remove("selected");
+  });
 
   button.classList.add("selected");
 }
 
-function sendWhatsApp(name, price){
+function fillSizes(){
+  const select=document.getElementById("size");
 
-  const size = selectedSize || "Size select nahi kiya";
+  const allSizes=[...new Set(
+    products.flatMap(p=>p.sizes)
+  )];
 
-  const message =
-    `Pari Footwear me ${name} ke size ${size} aur price ₹${price} ke baare me poochna hai.`;
+  select.innerHTML='<option value="">All Sizes</option>';
 
-  window.open(
-    "https://wa.me/919523275559?text=" +
-    encodeURIComponent(message),
-    "_blank"
-  );
+  allSizes.forEach(size=>{
+    const option=document.createElement("option");
+    option.value=size;
+    option.textContent=size;
+    select.appendChild(option);
+  });
 }
 
-function fillSizes(){
+function sendWhatsApp(name,price){
+  const size=selectedSize || "Size select nahi kiya";
 
-  let a = [
-    ...new Set(
-      products.flatMap(p => p.sizes)
-    )
-  ].sort(
-    (a,b) => Number(a) - Number(b)
-  );
+  const message=
+    `Pari Footwear me ${name} ke size ${size} aur price ${price} ke baare me poochna hai.`;
 
-  document.getElementById("size").innerHTML =
-    '<option value="">All Sizes</option>' +
-    a.map(
-      x => `<option value="${x}">${x}</option>`
-    ).join("");
+  window.location.href=
+    "https://wa.me/919523275559?text="+
+    encodeURIComponent(message);
 }
 
 function render(){
 
-  const q =
-    document
-      .getElementById("search")
-      .value
-      .toLowerCase();
+  const q=document.getElementById("search").value
+    .toLowerCase()
+    .trim();
 
-  const s =
-    document
-      .getElementById("size")
-      .value;
+  const s=document.getElementById("size").value;
 
-  let list = products.filter(
-    p =>
-      (cat === "All" || p.category === cat) &&
-      p.name.toLowerCase().includes(q) &&
-      (!s || p.sizes.includes(s))
+  const list=products.filter(p=>
+    (cat==="All" || p.category===cat) &&
+    p.name.toLowerCase().includes(q) &&
+    (!s || p.sizes.includes(s))
   );
 
-  const box =
-    document.getElementById("products");
+  const box=document.getElementById("products");
 
-  if(list.length === 0){
+  box.innerHTML=list.map(p=>`
+    <article class="card">
 
-    box.innerHTML =
-      '<div class="empty">Product nahi mila.</div>';
+      <img
+        src="${p.image}"
+        alt="${p.name}"
+        onerror="this.src='https://via.placeholder.com/600x600?text=Pari+Footwear'"
+      >
 
-    return;
-  }
+      <div class="info">
 
-  box.innerHTML = list.map(
-    p => `
-      <article class="card">
+        <b>${p.name}</b>
 
-        <img
-          src="${p.image || 'https://via.placeholder.com/500x400?text=Pari+Footwear'}"
-          alt="${p.name}"
-        >
+        <p class="price">${p.price}</p>
 
-        <div class="info">
-
-          <b>${p.name}</b>
-
-          <p class="price">₹${p.price}</p>
-
-          <div class="sizes">
-            ${p.sizes.map(
-              x =>
-                `<button
-                  type="button"
-                  onclick="selectSize('${x}',this)"
-                >${x}</button>`
-            ).join("")}
-          </div>
-
-          <a
-            class="wa"
-            href="#"
-            onclick="sendWhatsApp('${p.name}','${p.price}');return false;"
-          >
-            WhatsApp Enquiry
-          </a>
-
+        <div class="sizes">
+          ${p.sizes.map(x=>`
+            <button
+              type="button"
+              onclick="selectSize('${x}',this)">
+              ${x}
+            </button>
+          `).join("")}
         </div>
 
-      </article>
-    `
-  ).join("");
+        <a
+          class="wa"
+          href="#"
+          onclick="sendWhatsApp('${p.name}','${p.price}');return false;">
+          WhatsApp Enquiry
+        </a>
+
+      </div>
+    </article>
+  `).join("");
 }
-function sendWhatsApp(name, price){
-  const size = selectedSize || "Size select nahi kiya";
-  const message = `Pari Footwear me ${name} ke size ${size} aur price ${price} ke baare me poochna hai.`;
-  window.open("https://wa.me/919523275559?text=" + encodeURIComponent(message), "_blank");
-}
+
 fillSizes();
 render();
 
