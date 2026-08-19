@@ -121,8 +121,13 @@ nav button{
   margin:3px;
   border:1px solid #ddd;
   border-radius:6px;
-  font-size:12px;
-  background:white;
+  background:#fff;
+  cursor:pointer;
+}
+
+.sizes button.selected{
+  background:#c89b3c;
+  color:#fff;
 }
 
 .wa{
@@ -154,47 +159,49 @@ footer{
 <body>
 
 <header>
-<img class="logo" src="assets/logo.jpg" alt="Pari Footwear Logo">
-<h1>PARI FOOTWEAR</h1>
-<p class="sub">KD Road, Khalari, Ranchi, Jharkhand</p>
+  <img class="logo" src="assets/logo.jpg" alt="Pari Footwear Logo">
+  <h1>PARI FOOTWEAR</h1>
+  <p class="sub">KD Road, Khalari, Ranchi, Jharkhand</p>
 </header>
 
 <nav id="cats">
-<button onclick="setCat('All')">All</button>
-<button onclick="setCat('Men')">Men</button>
-<button onclick="setCat('Women')">Women</button>
-<button onclick="setCat('Kids')">Kids</button>
-<button onclick="setCat('Sports')">Sports</button>
+  <button onclick="setCat('All')">All</button>
+  <button onclick="setCat('Men')">Men</button>
+  <button onclick="setCat('Women')">Women</button>
+  <button onclick="setCat('Kids')">Kids</button>
+  <button onclick="setCat('Sports')">Sports</button>
 </nav>
 
 <div class="controls">
-<input id="search" placeholder="Product search..." oninput="render()">
+  <input id="search" placeholder="Product search..." oninput="render()">
 
-<select id="size" onchange="render()">
-<option value="">All Sizes</option>
-</select>
+  <select id="size" onchange="render()">
+    <option value="">All Sizes</option>
+  </select>
 </div>
 
 <div id="products" class="grid"></div>
 
 <footer>
-<b>PARI FOOTWEAR</b><br>
-KD Road, Khalari, Ranchi, Jharkhand<br>
-WhatsApp:
-<a style="color:#e5bd64" href="https://wa.me/919523275559">9523275559</a>
+  <b>PARI FOOTWEAR</b><br>
+  KD Road, Khalari, Ranchi, Jharkhand<br>
+  WhatsApp:
+  <a style="color:#e5bd64" href="https://wa.me/919523275559">
+    9523275559
+  </a>
 </footer>
 
 <script>
 
 const products = [
-{
-  name:"Men's Sports Shoe",
-  category:"Men",
-  price:"₹1499",
-  sizes:["6","7","8","9","10"],
-  image:"https://alncuvhcdovjxmydxviv.supabase.co/storage/v1/object/public/PRODUCT-IMAGES/WhatsApp%20Image%202026-08-18%20at%204.05.34%20PM.jpeg",
-  available:true
-}
+  {
+    name:"Men's Sports Shoe",
+    category:"Men",
+    price:"1499",
+    sizes:["6","7","8","9","10"],
+    image:"https://alncuvhcdovjxmydxviv.supabase.co/storage/v1/object/public/PRODUCT-IMAGES/WhatsApp%20Image%202026-08-18%20at%204.05.34%20PM.jpeg",
+    available:true
+  }
 ];
 
 let cat = "All";
@@ -205,23 +212,23 @@ function setCat(c){
   render();
 }
 
-function selectSize(size,button){
+function selectSize(size, button){
 
   selectedSize = size;
 
-  document.querySelectorAll(".sizes button").forEach(function(b){
-    b.style.background = "";
-  });
+  document
+    .querySelectorAll(".sizes button")
+    .forEach(btn => btn.classList.remove("selected"));
 
-  button.style.background = "#c89b3c";
+  button.classList.add("selected");
 }
 
-function sendWhatsApp(name,price){
+function sendWhatsApp(name, price){
 
   const size = selectedSize || "Size select nahi kiya";
 
   const message =
-    `Pari Footwear me ${name} ke size ${size} aur price ${price} ke baare me poochna hai.`;
+    `Pari Footwear me ${name} ke size ${size} aur price ₹${price} ke baare me poochna hai.`;
 
   window.open(
     "https://wa.me/919523275559?text=" +
@@ -234,53 +241,52 @@ function fillSizes(){
 
   let a = [
     ...new Set(
-      products.flatMap(function(p){
-        return p.sizes;
-      })
+      products.flatMap(p => p.sizes)
     )
-  ].sort(function(a,b){
-    return Number(a)-Number(b);
-  });
+  ].sort(
+    (a,b) => Number(a) - Number(b)
+  );
 
   document.getElementById("size").innerHTML =
     '<option value="">All Sizes</option>' +
-    a.map(function(x){
-      return `<option value="${x}">${x}</option>`;
-    }).join("");
+    a.map(
+      x => `<option value="${x}">${x}</option>`
+    ).join("");
 }
 
 function render(){
 
-  const q = document
-    .getElementById("search")
-    .value
-    .toLowerCase();
+  const q =
+    document
+      .getElementById("search")
+      .value
+      .toLowerCase();
 
-  const s = document.getElementById("size").value;
+  const s =
+    document
+      .getElementById("size")
+      .value;
 
-  let list = products.filter(function(p){
-
-    return (
+  let list = products.filter(
+    p =>
       (cat === "All" || p.category === cat) &&
       p.name.toLowerCase().includes(q) &&
       (!s || p.sizes.includes(s))
-    );
+  );
 
-  });
-
-  const box = document.getElementById("products");
+  const box =
+    document.getElementById("products");
 
   if(list.length === 0){
 
     box.innerHTML =
-      '<div class="empty">No products found.</div>';
+      '<div class="empty">Product nahi mila.</div>';
 
     return;
   }
 
-  box.innerHTML = list.map(function(p){
-
-    return `
+  box.innerHTML = list.map(
+    p => `
       <article class="card">
 
         <img
@@ -292,23 +298,16 @@ function render(){
 
           <b>${p.name}</b>
 
-          <p class="price">${p.price}</p>
+          <p class="price">₹${p.price}</p>
 
           <div class="sizes">
-
-            ${p.sizes.map(function(x){
-
-              return `
-                <button
+            ${p.sizes.map(
+              x =>
+                `<button
                   type="button"
                   onclick="selectSize('${x}',this)"
-                >
-                  ${x}
-                </button>
-              `;
-
-            }).join("")}
-
+                >${x}</button>`
+            ).join("")}
           </div>
 
           <a
@@ -322,9 +321,8 @@ function render(){
         </div>
 
       </article>
-    `;
-
-  }).join("");
+    `
+  ).join("");
 }
 
 fillSizes();
