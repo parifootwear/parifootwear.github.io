@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Pari Footwear | KD Road, Khalari</title>
 
 <style>
@@ -12,7 +13,9 @@
   --cream:#fffaf0;
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -37,7 +40,7 @@ header{
 }
 
 h1{
-  margin:10px 0 2px;
+  margin:10px 0 4px;
   color:#e5bd64;
   font-family:Georgia,serif;
   font-size:38px;
@@ -46,128 +49,138 @@ h1{
 header p{
   margin:0;
   font-family:Georgia,serif;
-  font-size:22px;
+  font-size:20px;
   font-weight:bold;
 }
 
 .categories{
   display:flex;
   justify-content:center;
-  gap:12px;
+  gap:10px;
   flex-wrap:wrap;
-  padding:20px 10px;
+  padding:18px 10px;
   background:white;
   border-bottom:1px solid #ddd;
 }
 
-.categories button,
-.sizes button{
-  border:1px solid #c89b3c;
+.categories button{
+  border:1px solid var(--gold);
   background:#fffaf0;
   border-radius:25px;
-  padding:12px 25px;
-  font-size:18px;
+  padding:10px 20px;
+  font-size:16px;
   cursor:pointer;
 }
 
-.categories button.active,
-.sizes button.selected{
-  background:#c89b3c;
+.categories button.active{
+  background:var(--gold);
   color:white;
 }
 
 .controls{
   display:flex;
-  gap:15px;
-  padding:26px;
-  background:var(--cream);
+  gap:12px;
+  padding:20px;
 }
 
 #search{
   flex:1;
-  padding:18px;
+  padding:14px;
   border:1px solid #ddd;
-  border-radius:16px;
-  font-size:18px;
+  border-radius:12px;
+  font-size:16px;
 }
 
 #size{
-  width:46%;
-  padding:18px;
+  width:45%;
+  padding:14px;
   border:1px solid #ddd;
-  border-radius:16px;
-  font-size:18px;
+  border-radius:12px;
+  font-size:16px;
 }
 
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  padding:25px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+  padding:20px;
 }
 
 .card{
   background:white;
-  border-radius:18px;
+  border-radius:16px;
   overflow:hidden;
   box-shadow:0 3px 12px #0002;
 }
 
 .card img{
   width:100%;
-  height:380px;
+  height:320px;
   object-fit:cover;
   display:block;
+  background:#f3f3f3;
 }
 
 .info{
-  padding:20px;
+  padding:16px;
 }
 
 .info b{
-  font-size:25px;
-  font-family:Georgia,serif;
+  font-size:22px;
 }
 
 .price{
   color:#b8860b;
-  font-size:25px;
+  font-size:22px;
   font-weight:bold;
-  margin:12px 0;
+  margin:10px 0;
 }
 
 .sizes{
   display:flex;
-  gap:8px;
+  gap:7px;
   flex-wrap:wrap;
-  margin:15px 0;
+  margin:12px 0;
 }
 
 .sizes button{
-  padding:10px 18px;
-  border-radius:10px;
-  font-size:17px;
+  border:1px solid var(--gold);
+  background:white;
+  border-radius:8px;
+  padding:8px 14px;
+  cursor:pointer;
+}
+
+.sizes button.selected{
+  background:var(--gold);
+  color:white;
 }
 
 .wa{
   display:block;
   text-align:center;
-  text-decoration:none;
   background:#25D366;
   color:white;
-  padding:14px;
-  border-radius:10px;
-  font-size:18px;
+  padding:12px;
+  border-radius:9px;
+  text-decoration:none;
   font-weight:bold;
+  margin-top:12px;
+}
+
+.empty{
+  grid-column:1/-1;
+  text-align:center;
+  padding:40px;
+  color:#777;
 }
 
 footer{
-  background:#171717;
+  background:var(--dark);
   color:white;
   text-align:center;
-  padding:30px 15px;
-  font-family:Georgia,serif;
-  font-size:20px;
+  padding:25px 15px;
+  margin-top:20px;
 }
 
 footer a{
@@ -175,12 +188,21 @@ footer a{
 }
 
 @media(max-width:600px){
-  h1{font-size:32px}
-  header p{font-size:18px}
-  .controls{padding:20px 15px}
-  .grid{padding:15px}
-  .card img{height:auto}
-  #size{width:45%}
+  h1{
+    font-size:32px;
+  }
+
+  .controls{
+    padding:15px;
+  }
+
+  .grid{
+    padding:15px;
+  }
+
+  .card img{
+    height:auto;
+  }
 }
 </style>
 </head>
@@ -188,159 +210,334 @@ footer a{
 <body>
 
 <header>
-  <img class="logo" src="assets/logo.jpg" alt="Pari Footwear">
-  <h1>PARI FOOTWEAR</h1>
-  <p>KD Road, Khalari, Ranchi, Jharkhand</p>
+
+<img
+  class="logo"
+  src="assets/logo.jpg"
+  alt="Pari Footwear"
+>
+
+<h1>PARI FOOTWEAR</h1>
+
+<p>KD Road, Khalari, Ranchi, Jharkhand</p>
+
 </header>
 
+
 <div class="categories">
-  <button onclick="setCat('All')" class="active">All</button>
-  <button onclick="setCat('Men')">Men</button>
-  <button onclick="setCat('Women')">Women</button>
-  <button onclick="setCat('Kids')">Kids</button>
-  <button onclick="setCat('Sports')">Sports</button>
+
+<button class="active" onclick="setCat('All')">
+All
+</button>
+
+<button onclick="setCat('Men')">
+Men
+</button>
+
+<button onclick="setCat('Women')">
+Women
+</button>
+
+<button onclick="setCat('Kids')">
+Kids
+</button>
+
+<button onclick="setCat('Sports')">
+Sports
+</button>
+
 </div>
+
 
 <div class="controls">
-  <input id="search" type="text" placeholder="Product search..." oninput="render()">
 
-  <select id="size" onchange="render()">
-    <option value="">All Sizes</option>
-  </select>
+<input
+  id="search"
+  type="text"
+  placeholder="Product search..."
+  oninput="render()"
+>
+
+<select
+  id="size"
+  onchange="render()"
+>
+<option value="">All Sizes</option>
+</select>
+
 </div>
 
-<div id="products" class="grid"></div>
+
+<div
+  id="products"
+  class="grid"
+></div>
+
 
 <footer>
-  <b>PARI FOOTWEAR</b><br>
-  KD Road, Khalari, Ranchi, Jharkhand<br>
-  WhatsApp:
-  <a href="https://wa.me/919523275559">9523275559</a>
+
+<b>PARI FOOTWEAR</b>
+<br>
+
+KD Road, Khalari, Ranchi, Jharkhand
+<br>
+
+WhatsApp:
+
+<a href="https://wa.me/919523275559">
+9523275559
+</a>
+
 </footer>
+
 
 <script>
 
 const products = [
-  {
-    name:"Men's Sports Shoe",
-    category:"Men",
-    price:"₹1499",
-    sizes:["6","7","8","9","10"],
-    image:"https://via.placeholder.com/600x600?text=Pari+Footwear"
-  }
+
+{
+  name:"Men's Sports Shoe",
+  category:"Men",
+  price:"₹1499",
+
+  sizes:[
+    "6",
+    "7",
+    "8",
+    "9",
+    "10"
+  ],
+
+  image:"https://alncuvhcdovjxmydxviv.supabase.co/storage/v1/object/public/PRODUCT-IMAGES/WhatsApp%20Image%202026-08-18%20at%204.05.34%20PM.jpeg",
+
+  available:true
+}
+
 ];
 
-let cat="All";
-let selectedSize="";
 
-function setCat(c){
-  cat=c;
+let cat = "All";
 
-  document.querySelectorAll(".categories button").forEach(btn=>{
-    btn.classList.remove("active");
-    if(btn.textContent===c){
-      btn.classList.add("active");
-    }
-  });
+let selectedSize = "";
+
+
+function setCat(category){
+
+  cat = category;
+
+  document
+    .querySelectorAll(".categories button")
+    .forEach(function(button){
+
+      button.classList.remove("active");
+
+      if(button.textContent.trim() === category){
+
+        button.classList.add("active");
+
+      }
+
+    });
 
   render();
+
 }
+
 
 function selectSize(size,button){
-  selectedSize=size;
 
-  document.querySelectorAll(".sizes button").forEach(btn=>{
-    btn.classList.remove("selected");
-  });
+  selectedSize = size;
+
+  document
+    .querySelectorAll(".sizes button")
+    .forEach(function(btn){
+
+      btn.classList.remove("selected");
+
+    });
 
   button.classList.add("selected");
+
 }
+
 
 function fillSizes(){
-  const select=document.getElementById("size");
 
-  const allSizes=[...new Set(
-    products.flatMap(p=>p.sizes)
-  )];
+  const select =
+    document.getElementById("size");
 
-  select.innerHTML='<option value="">All Sizes</option>';
+  const sizes = [
+    ...new Set(
+      products.flatMap(function(product){
 
-  allSizes.forEach(size=>{
-    const option=document.createElement("option");
-    option.value=size;
-    option.textContent=size;
+        return product.sizes;
+
+      })
+    )
+  ];
+
+  select.innerHTML =
+    '<option value="">All Sizes</option>';
+
+  sizes.forEach(function(size){
+
+    const option =
+      document.createElement("option");
+
+    option.value = size;
+
+    option.textContent = size;
+
     select.appendChild(option);
+
   });
+
 }
+
 
 function sendWhatsApp(name,price){
-  const size=selectedSize || "Size select nahi kiya";
 
-  const message=
-    `Pari Footwear me ${name} ke size ${size} aur price ${price} ke baare me poochna hai.`;
+  const size =
+    selectedSize || "Size select nahi kiya";
 
-  window.location.href=
-    "https://wa.me/919523275559?text="+
+  const message =
+    "Pari Footwear me " +
+    name +
+    " ke size " +
+    size +
+    " aur price " +
+    price +
+    " ke baare me poochna hai.";
+
+  window.location.href =
+    "https://wa.me/919523275559?text=" +
     encodeURIComponent(message);
+
 }
+
 
 function render(){
 
-  const q=document.getElementById("search").value
-    .toLowerCase()
-    .trim();
+  const searchInput =
+    document.getElementById("search");
 
-  const s=document.getElementById("size").value;
+  const sizeSelect =
+    document.getElementById("size");
 
-  const list=products.filter(p=>
-    (cat==="All" || p.category===cat) &&
-    p.name.toLowerCase().includes(q) &&
-    (!s || p.sizes.includes(s))
-  );
+  const search =
+    searchInput.value
+      .toLowerCase()
+      .trim();
 
-  const box=document.getElementById("products");
+  const size =
+    sizeSelect.value;
 
-  box.innerHTML=list.map(p=>`
-    <article class="card">
 
-      <img
-        src="${p.image}"
-        alt="${p.name}"
-        onerror="this.src='https://via.placeholder.com/600x600?text=Pari+Footwear'"
-      >
+  const list =
+    products.filter(function(product){
 
-      <div class="info">
+      const categoryOK =
+        cat === "All" ||
+        product.category === cat;
 
-        <b>${p.name}</b>
+      const searchOK =
+        product.name
+          .toLowerCase()
+          .includes(search);
 
-        <p class="price">${p.price}</p>
+      const sizeOK =
+        !size ||
+        product.sizes.includes(size);
 
-        <div class="sizes">
-          ${p.sizes.map(x=>`
+      return (
+        categoryOK &&
+        searchOK &&
+        sizeOK
+      );
+
+    });
+
+
+  const box =
+    document.getElementById("products");
+
+
+  if(list.length === 0){
+
+    box.innerHTML =
+      '<div class="empty">' +
+      'Product nahi mila.' +
+      '</div>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    list.map(function(product){
+
+      const sizeButtons =
+        product.sizes.map(function(size){
+
+          return `
             <button
               type="button"
-              onclick="selectSize('${x}',this)">
-              ${x}
+              onclick="selectSize('${size}',this)"
+            >
+              ${size}
             </button>
-          `).join("")}
-        </div>
+          `;
 
-        <a
-          class="wa"
-          href="#"
-          onclick="sendWhatsApp('${p.name}','${p.price}');return false;">
-          WhatsApp Enquiry
-        </a>
+        }).join("");
 
-      </div>
-    </article>
-  `).join("");
+
+      return `
+        <article class="card">
+
+          <img
+            src="${product.image}"
+            alt="${product.name}"
+          >
+
+          <div class="info">
+
+            <b>
+              ${product.name}
+            </b>
+
+            <p class="price">
+              ${product.price}
+            </p>
+
+            <div class="sizes">
+              ${sizeButtons}
+            </div>
+
+            <a
+              class="wa"
+              href="https://wa.me/919523275559"
+              onclick="sendWhatsApp('${product.name}','${product.price}'); return false;"
+            >
+              WhatsApp Enquiry
+            </a>
+
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
 }
 
+
 fillSizes();
+
 render();
 
 </script>
+
 
 </body>
 </html>
