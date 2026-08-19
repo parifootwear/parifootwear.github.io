@@ -324,7 +324,11 @@ function render(){
     `
   ).join("");
 }
-
+function sendWhatsApp(name, price){
+  const size = selectedSize || "Size select nahi kiya";
+  const message = `Pari Footwear me ${name} ke size ${size} aur price ${price} ke baare me poochna hai.`;
+  window.open("https://wa.me/919523275559?text=" + encodeURIComponent(message), "_blank");
+}
 fillSizes();
 render();
 
