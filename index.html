@@ -47,11 +47,14 @@ function render(){
  const q=document.getElementById("search").value.toLowerCase(), s=document.getElementById("size").value;
  let list=products.filter(p=>(cat==="All"||p.category===cat)&&p.name.toLowerCase().includes(q)&&(!s||p.sizes.includes(s)));
  const box=document.getElementById("products");
- box.innerHTML = list.map(p => `<article class="card">
+box.innerHTML = list.map(p => `<article class="card">
 <img src="${p.image || 'https://via.placeholder.com/500x400?text=Pari+Footwear'}" alt="${p.name}">
-<div class="info"><b>${p.name}</b><p class="price">${p.price}</p>
-<div class="sizes">${p.sizes.map(x => `<button type="button" onclick="selectSize('${x}',this)">${x}</button>`).join("")}</div>
+<div class="info"><b>${p.name}</b><p class="price">₹${p.price}</p>
+<div class="sizes">${p.sizes.map(x => `<button type="button" onclick="selectSize('${x}',this)">${x}</button>`).join('')}</div>
 <a class="wa" href="#" onclick="sendWhatsApp('${p.name}','${p.price}');return false;">WhatsApp Enquiry</a></div></article>`).join("");
+
+
+
 
 
  
